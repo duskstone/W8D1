@@ -1,0 +1,48 @@
+<h1>Create a New Post</h1>
+
+
+<div>
+    <form action="<%= user_url(@user) %>" method="POST">
+    <input type="hidden" name="authenticity token" value="<%= form_authenticity_token %>">
+        <label>Title:
+            <input name="post[title]">
+        </label>
+        <label>Content:
+            <input name="post[content]" value="">
+        </label>
+        <label>URL:
+            <input name="post[url]">
+        </label>
+        <label>True:
+            <input type="radio" name="post[status]" value="true">
+        </label>
+        <label>False:
+            <input type="radio" name="post[status]" value="false">
+        </label>
+        <button type="submit">Create Post</button>
+    </form>
+</div>
+
+<h1>Show Posts</h1>
+<div>
+    <p>These are <%= @user.username %>'s Posts</p>
+    <ul>
+        <% @user.posts.each do |post| %>
+            <li><%= post.title %></li>
+            <li><%= post.content %></li>
+            <li><%= post.url %></li>
+        <form action="<%= users_url(post) %>" method="POST">
+             <input type="hidden" name="authenticity token" value="<%= form_authenticity_token %>">
+             <input type="hidden" name="_method" method="DELETE">
+             <button type="submit">Delete</button>
+        
+        </form>
+
+        <% end %>
+    
+    </ul>
+
+</div>
+
+
+
